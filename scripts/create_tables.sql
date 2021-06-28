@@ -26,7 +26,8 @@ CREATE TABLE "user" (
 
 CREATE TABLE "style_img" (
     id serial PRIMARY KEY,
-    file_path text NOT NULL
+    file_path text NOT NULL,
+    is_ref boolean NOT NULL
 );
 
 CREATE TABLE "input_img" (
