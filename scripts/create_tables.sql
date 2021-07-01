@@ -27,7 +27,8 @@ CREATE TABLE "user" (
 CREATE TABLE "style_img" (
     id serial PRIMARY KEY,
     file_path text NOT NULL,
-    is_ref boolean NOT NULL
+    is_ref boolean NOT NULL,
+    ref_class varchar(10)
 );
 
 CREATE TABLE "input_img" (
@@ -59,11 +60,14 @@ CREATE TABLE "job" (
     style_img_id int,
     input_img_id int,
     output_img_id int,
+    ref_class varchar(10),
     FOREIGN KEY (session_id) REFERENCES "session" (id) ON UPDATE CASCADE,
     FOREIGN KEY (style_img_id) REFERENCES "style_img" (id) ON UPDATE CASCADE,
     FOREIGN KEY (input_img_id) REFERENCES "input_img" (id) ON UPDATE CASCADE,
     FOREIGN KEY (output_img_id) REFERENCES "output_img" (id) ON UPDATE CASCADE
 );
+
+CREATE INDEX ix_job_session_id ON "job" USING btree (session_id);
 
 CREATE TABLE "question" (
     id serial PRIMARY KEY,
