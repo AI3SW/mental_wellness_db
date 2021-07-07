@@ -85,9 +85,11 @@ CREATE TABLE "option" (
 CREATE TABLE "result" (
     id serial PRIMARY KEY,
     session_id varchar,
-    questions int[],
-    options int[],
-    n_turns int,
-    FOREIGN KEY (session_id) REFERENCES "session" (id) ON UPDATE CASCADE
+    option_id int,
+    sequence_no int,
+    FOREIGN KEY (session_id) REFERENCES "session" (id) ON UPDATE CASCADE,
+    FOREIGN KEY (option_id) REFERENCES "option" (id) ON UPDATE CASCADE
 );
+
+CREATE INDEX ix_result_session_id ON "result" USING btree (session_id);
 
