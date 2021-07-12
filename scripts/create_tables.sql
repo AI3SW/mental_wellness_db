@@ -24,11 +24,18 @@ CREATE TABLE "user" (
     id varchar PRIMARY KEY
 );
 
+CREATE TABLE "model" (
+    id serial PRIMARY KEY,
+    name varchar(15)
+);
+
 CREATE TABLE "style_img" (
     id serial PRIMARY KEY,
+    model_id int,
     file_path text NOT NULL,
     is_ref boolean NOT NULL,
-    ref_class varchar(10)
+    ref_class varchar(10),
+    FOREIGN KEY (model_id) REFERENCES "model" (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE "input_img" (
