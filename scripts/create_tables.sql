@@ -18,6 +18,10 @@ DROP TABLE IF EXISTS "input_img";
 
 DROP TABLE IF EXISTS "style_img";
 
+DROP TABLE IF EXISTS "theme";
+
+DROP TABLE IF EXISTS "model";
+
 DROP TABLE IF EXISTS "user";
 
 CREATE TABLE "user" (
@@ -29,13 +33,20 @@ CREATE TABLE "model" (
     name varchar(15)
 );
 
+CREATE TABLE "theme" (
+    id serial PRIMARY KEY,
+    name varchar(15)
+);
+
 CREATE TABLE "style_img" (
     id serial PRIMARY KEY,
     model_id int,
+    theme_id int,
     file_path text NOT NULL,
     is_ref boolean NOT NULL,
     ref_class varchar(10),
-    FOREIGN KEY (model_id) REFERENCES "model" (id) ON UPDATE CASCADE
+    FOREIGN KEY (model_id) REFERENCES "model" (id) ON UPDATE CASCADE,
+    FOREIGN KEY (theme_id) REFERENCES "theme" (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE "input_img" (
