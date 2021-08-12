@@ -51,12 +51,14 @@ CREATE TABLE "style_img" (
 
 CREATE TABLE "input_img" (
     id serial PRIMARY KEY,
-    file_path text NOT NULL
+    file_path text NOT NULL,
+    create_date timestamp with time zone DEFAULT NOW()
 );
 
 CREATE TABLE "output_img" (
     id serial PRIMARY KEY,
-    file_path text NOT NULL
+    file_path text NOT NULL,
+    create_date timestamp with time zone DEFAULT NOW()
 );
 
 CREATE TABLE "session" (
